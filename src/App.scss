@@ -1,0 +1,36 @@
+body {
+  background-color: #F4A261;
+
+  .App-header{
+    text-align: center;
+  }
+}
+
+table {
+  height: 350px;
+  width: 250px;
+  margin: 0 auto;
+  text-align: center;
+
+  .result{
+    height: 80px;
+    background-color: #2A9D8F;
+  }
+  td {
+    width: 30px
+  }
+  .top-left {
+    background-color: #335F70;
+  }
+  .right {
+    background-color: #E9C46A;
+  }
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  background-color: #264653;
+  color: #fff;
+  font-size: 1.3rem
+}
