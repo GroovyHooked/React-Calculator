@@ -1,4 +1,7 @@
-const Zero = () => {
+const Zero = (displayNum) => {
+
+  
+
   return (
     <td className="zero" colSpan="2">
       0

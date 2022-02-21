@@ -1,5 +1,12 @@
 const Eight = () => {
-  return <td className="eight">8</td>;
+
+  const displayNum = () => {
+    const num = document.querySelector('.eight')
+    const display = document.querySelector('.result')
+    display.innerHTML += num.innerHTML
+  };
+
+  return <td className="eight" onClick={displayNum}>8</td>;
 };
 
 export default Eight;

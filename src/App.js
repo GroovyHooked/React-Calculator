@@ -1,4 +1,8 @@
+import { useState, useRef } from 'react';
+
 import "./App.scss";
+
+import Mycalculator from "./logic.js";
 
 import Zero from "./components/numbers/zero.js";
 import One from "./components/numbers/one.js";
@@ -23,7 +27,27 @@ import Modulus from "./components/various/modulus.js";
 import PositiveOrNegative from "./components/various/positiveOrNegative.js";
 import Comma from "./components/various/comma.js";
 
+
+
 function App() {
+
+  const [selector, setSelector] = useState()
+
+  const numRef0 = useRef()
+
+  const displayNum = () => {
+    const foo = numRef0.current.attribute
+    console.log(foo)
+    setSelector(foo)
+    const num = document.querySelector(selector)
+    const display = document.querySelector('.result')
+    display.innerHTML += num.innerHTML
+    console.log('test')
+  };
+
+  const display = () => {
+    console.log('test')
+  }
   return (
     <div className="container">
       <header className="App-header">
@@ -57,8 +81,8 @@ function App() {
             <Addition />
           </tr>
           <tr>
-            <Zero />
-            <Comma />
+            <Zero  ref={numRef0} onClick={displayNum} />
+            <Comma display={display} />
             <Equal />
           </tr>
         </tbody>
@@ -67,10 +91,5 @@ function App() {
   );
 }
 
-const zero = document.querySelector(".zero");
-//const result = document.querySelector('.result')
-
-//console.log(result)
-console.log(zero);
 
 export default App;

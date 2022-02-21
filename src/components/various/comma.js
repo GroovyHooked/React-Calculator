@@ -1,5 +1,6 @@
-const Comma = () => {
-  return <td className="comma">,</td>;
+const Comma = (display) => {
+
+  return <td className="comma" onClick={display}>,</td>;
 };
 
 export default Comma;
