@@ -1,13 +1,13 @@
 import "./App.scss";
 
 import Mycalculator from "./logic.js";
-
+import Title from "./title";
 import Number from "./components/numbers/Number.js";
 import Operator from "./components/operators/Operator";
 
 import Equal from "./components/operators/equal.js";
 
-import Display from "./components/various/display.js";
+import Display from "./display.js";
 import Clear from "./components/various/clear.js";
 import Modulus from "./components/various/modulus.js";
 import PositiveOrNegative from "./components/various/positiveOrNegative.js";
@@ -16,9 +16,7 @@ import Comma from "./components/various/comma.js";
 function App() {
   return (
     <div className="container">
-      <header className="App-header">
-        <h3>Calculator</h3>
-      </header>
+      <Title />
       <table>
         <Display />
         <tbody>

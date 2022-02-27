@@ -1,7 +1,6 @@
 import React from "react";
 
-export default function Number({ number, col_span }) {
-  console.log(col_span);
+const Number = ({ number, col_span }) => {
   const displayNum = () => {
     const display = document.querySelector(".result");
     display.innerHTML += number;
@@ -12,4 +11,6 @@ export default function Number({ number, col_span }) {
       {number}
     </td>
   );
-}
+};
+
+export default Number;
