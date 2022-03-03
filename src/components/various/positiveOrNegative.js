@@ -1,5 +1,5 @@
 const PositiveOrNegative = () => {
-  return <td className="top-left positiveOrNegative">+/-</td>;
+  return <div className="box top-left positiveOrNegative">+/-</div>;
 };
 
 export default PositiveOrNegative;

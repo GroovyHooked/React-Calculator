@@ -1,9 +1,61 @@
 body {
-  background-color: #F4A261;
+  background-color: #f4a261;
 
-  .App-header{
+  .App-header {
     text-align: center;
   }
+  .calculator {
+    border: 1px solid white;
+    height: 385px;
+    width: 247px;
+    margin: 0 auto;
+
+    .display {
+      height: 80px;
+      background-color: #2a9d8f;
+      color: white;
+      line-height: 80px;
+      font-size: 22px;
+      padding: 0 10px;
+      text-align: right;
+    }
+  }
+  .underDisplay {
+    display: flex;
+    flex-wrap: wrap;
+
+    .first {
+      background-color: #787a7e;
+    }
+
+    .line {
+      display: flex;
+      height: 61px;
+      width: 100%;
+    }
+
+    .box {
+      border: 1px solid white;
+      height: 60px;
+      width: 60px;
+      text-align: center;
+      line-height: 60px;
+      color: white;
+      font-size: 25px;
+      font-weight: bolder;
+    }
+    .box:nth-child(4){
+      background-color: #da7c2a;
+    }
+  }
+}
+.Fifth.line{
+  .box:nth-child(3){
+    background-color: #da7c2a;
+  }
+}
+.Fifth.line > div:nth-child(1) {
+  width: 122px;
 }
 
 table {
@@ -12,25 +64,27 @@ table {
   margin: 0 auto;
   text-align: center;
 
-  .result{
+  .result {
     height: 80px;
-    background-color: #2A9D8F;
+    background-color: #2a9d8f;
   }
   td {
-    width: 30px
+    width: 30px;
   }
   .top-left {
-    background-color: #335F70;
+    background-color: #335f70;
   }
   .right {
-    background-color: #E9C46A;
+    background-color: #e9c46a;
   }
 }
 
-table, th, td {
+table,
+th,
+td {
   border: 1px solid black;
   border-collapse: collapse;
   background-color: #264653;
   color: #fff;
-  font-size: 1.3rem
+  font-size: 1.3rem;
 }

@@ -5,9 +5,9 @@ const Clear = () => {
   };
 
   return (
-    <td className="top-left clear" onClick={clear}>
+    <div className=" box top-left clear" onClick={clear}>
       AC
-    </td>
+    </div>
   );
 };
 

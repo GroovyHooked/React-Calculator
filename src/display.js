@@ -1,12 +1,10 @@
 const Display = ({ display }) => {
   return (
-    <thead>
-      <tr>
-        <th colSpan="4" className="result">
-          {display}
-        </th>
-      </tr>
-    </thead>
+    <div className="display">
+      <div colSpan="4" className="result">
+        {display}
+      </div>
+    </div>
   );
 };
 

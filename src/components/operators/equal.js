@@ -1,11 +1,11 @@
 const Equal = (num1, num2, whichOperator, equal) => {
   return (
-    <td
-      className="right equal"
+    <div
+      className="right equal box"
       onClick={() => equal(num1, num2, whichOperator)}
     >
       =
-    </td>
+    </div>
   );
 };
 

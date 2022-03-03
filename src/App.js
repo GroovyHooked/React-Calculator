@@ -77,10 +77,10 @@ const App = () => {
   return (
     <div className="container">
       <Title />
-      <table>
+      <div className="calculator">
         <Display display={display} />
-        <tbody>
-          <tr>
+        <div className="underDisplay">
+          <div className="first line">
             <Clear />
             <PositiveOrNegative />
             <Modulus />
@@ -91,8 +91,8 @@ const App = () => {
               opfunc={operator}
               double={double}
             />
-          </tr>
-          <tr>
+          </div>
+          <div className="second line">
             <Number number="7" col_span="1" addNumber={addNumber} />
             <Number number="8" col_span="1" addNumber={addNumber} />
             <Number number="9" col_span="1" addNumber={addNumber} />
@@ -103,8 +103,8 @@ const App = () => {
               opfunc={operator}
               double={double}
             />
-          </tr>
-          <tr>
+          </div>
+          <div className="Third line">
             <Number number="4" col_span="1" addNumber={addNumber} />
             <Number number="5" col_span="1" addNumber={addNumber} />
             <Number number="6" col_span="1" addNumber={addNumber} />
@@ -115,8 +115,8 @@ const App = () => {
               opfunc={operator}
               double={double}
             />
-          </tr>
-          <tr>
+          </div>
+          <div className="Fourth line">
             <Number number="1" col_span="1" addNumber={addNumber} />
             <Number number="2" col_span="1" addNumber={addNumber} />
             <Number number="3" col_span="1" addNumber={addNumber} />
@@ -127,8 +127,8 @@ const App = () => {
               opfunc={operator}
               double={double}
             />
-          </tr>
-          <tr>
+          </div>
+          <div className="Fifth line">
             <Number number="0" col_span="2" addNumber={addNumber} />
             <Comma />
             <Equal
@@ -137,9 +137,9 @@ const App = () => {
               whichOperator={whichOperator}
               equal={equal}
             />
-          </tr>
-        </tbody>
-      </table>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

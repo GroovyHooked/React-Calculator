@@ -6,9 +6,9 @@ const Comma = () => {
   };
 
   return (
-    <td className="comma" onClick={coma}>
+    <div className="box comma" onClick={coma}>
       ,
-    </td>
+    </div>
   );
 };
 

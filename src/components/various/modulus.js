@@ -1,5 +1,5 @@
 const Modulus = () => {
-  return <td className="top-left modulus">%</td>;
+  return <div className="box top-left modulus">%</div>;
 };
 
 export default Modulus;
