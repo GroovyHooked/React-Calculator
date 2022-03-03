@@ -1,13 +1,8 @@
 import React from "react";
 
-const Number = ({ number, col_span }) => {
-  const displayNum = () => {
-    const display = document.querySelector(".result");
-    display.innerHTML += number;
-  };
-
+const Number = ({ number, col_span, addNumber }) => {
   return (
-    <td onClick={displayNum} colSpan={col_span}>
+    <td colSpan={col_span} onClick={() => addNumber(number)}>
       {number}
     </td>
   );
