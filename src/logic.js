@@ -16,6 +16,9 @@ class Mycalculator {
   minus() {
     return this.num1 - this.num2;
   }
+  modulo() {
+    return this.num1 % this.num2;
+  }
   whichCalc() {
     if (this.factor === "*") {
       return this.multi();
@@ -28,6 +31,9 @@ class Mycalculator {
     }
     if (this.factor === "-") {
       return this.minus();
+    }
+    if (this.factor === "%") {
+      return this.modulo();
     }
   }
 }

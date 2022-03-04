@@ -1,13 +1,7 @@
-const Comma = () => {
-  const coma = () => {
-    const display = document.querySelector(".result");
-    if (display.innerHTML === "" || display.innerHTML.includes(",")) return;
-    display.innerHTML += ",";
-  };
-
+const Comma = ({ comma }) => {
   return (
-    <div className="box comma" onClick={coma}>
-      ,
+    <div className="box comma" onClick={() => comma()}>
+      .
     </div>
   );
 };
