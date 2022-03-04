@@ -19,39 +19,51 @@ const App = () => {
   const [display, setDisplay] = useState("");
   const [num1, setNum1] = useState("");
   const [num2, setNum2] = useState("");
+  const [numberOnHold, setnumberOnHold] = useState("");
   const [resetOp, setResetOp] = useState(false);
   const [isOp, setIsOp] = useState(false);
   const [whichOperator, setwhichOperator] = useState("");
+
+  const clear = () => {
+    setDisplay("");
+    setNum1("");
+    setNum2("");
+    setResetOp(false);
+    setIsOp(false);
+    setwhichOperator("");
+  };
 
   useEffect(() => {
     setIsOp(false);
   }, [resetOp]);
 
   const opOnOrOff = () => {
+    setnumberOnHold(num1);
     setNum1("");
     setDisplay("");
     setIsOp(true);
-  };
-
-  const double = {
-    onClick: function (op) {
-      opOnOrOff();
-      operator(op);
-    },
   };
 
   const operator = (op) => {
     setwhichOperator(op);
   };
 
-  const equal = (num1, num2, operator) => {
-    let operation = new Mycalculator(num1, operator, num2);
+  const doubleFunc = {
+    onClick: (op) => {
+      opOnOrOff();
+      operator(op);
+    },
+  };
+
+  const equal = (numberOnHold, num2, whichOperator) => {
+    let operation = new Mycalculator(numberOnHold, whichOperator, num2);
     let res = operation.whichCalc();
     setDisplay(res);
     setResetOp(false);
     setNum1("");
     setNum2("");
     setIsOp(false);
+    setnumberOnHold("");
   };
 
   const addNumber = (num) => {
@@ -81,15 +93,13 @@ const App = () => {
         <Display display={display} />
         <div className="underDisplay">
           <div className="first line">
-            <Clear />
+            <Clear clear={clear} />
             <PositiveOrNegative />
             <Modulus />
             <Operator
               operator="/"
               cssClass="division"
-              usedOperator={opOnOrOff}
-              opfunc={operator}
-              double={double}
+              doubleFunc={doubleFunc}
             />
           </div>
           <div className="second line">
@@ -99,9 +109,7 @@ const App = () => {
             <Operator
               operator="*"
               cssClass="multiplication"
-              usedOperator={opOnOrOff}
-              opfunc={operator}
-              double={double}
+              doubleFunc={doubleFunc}
             />
           </div>
           <div className="Third line">
@@ -111,9 +119,7 @@ const App = () => {
             <Operator
               operator="-"
               cssClass="subtraction"
-              usedOperator={opOnOrOff}
-              opfunc={operator}
-              double={double}
+              doubleFunc={doubleFunc}
             />
           </div>
           <div className="Fourth line">
@@ -123,16 +129,14 @@ const App = () => {
             <Operator
               operator="+"
               cssClass="addition"
-              usedOperator={opOnOrOff}
-              opfunc={operator}
-              double={double}
+              doubleFunc={doubleFunc}
             />
           </div>
           <div className="Fifth line">
             <Number number="0" col_span="2" addNumber={addNumber} />
             <Comma />
             <Equal
-              num1={num1}
+              numberOnHold={numberOnHold}
               num2={num2}
               whichOperator={whichOperator}
               equal={equal}

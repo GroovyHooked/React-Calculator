@@ -1,10 +1,10 @@
 import React from "react";
 
-const Operator = ({ operator, cssClass, opOnOrOff, opfunc, double }) => {
+const Operator = ({ operator, cssClass, doubleFunc }) => {
   return (
     <div
       className={"box right " + cssClass}
-      onClick={() => double.onClick(operator)}
+      onClick={() => doubleFunc.onClick(operator)}
     >
       {operator}
     </div>

@@ -1,11 +1,6 @@
-const Clear = () => {
-  const clear = () => {
-    const display = document.querySelector(".result");
-    display.innerHTML = "";
-  };
-
+const Clear = ({ clear }) => {
   return (
-    <div className=" box top-left clear" onClick={clear}>
+    <div className=" box top-left clear" onClick={() => clear()}>
       AC
     </div>
   );
