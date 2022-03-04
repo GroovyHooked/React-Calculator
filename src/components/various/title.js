@@ -1,6 +1,6 @@
 const Title = () => {
   return (
-    <header className="App-header">
+    <header className="appHeader">
       <h3>Calculator</h3>
     </header>
   );

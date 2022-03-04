@@ -1,19 +1,21 @@
 import { useState, useEffect } from "react";
 import "./App.scss";
 
-import Mycalculator from "./components/various/logic.js";
+import Mycalculator from "./components/various/logic";
 import Title from "./components/various/title";
-import Number from "./components/Number.js";
+
+import { Firstline } from "./components/lines/firstline";
+//import { SecondToFourth } from "./components/lines/secondtofourth";
+
+import Number from "./components/Number";
 import Operator from "./components/Operator";
 
-import Equal from "./components/various/equal.js";
+import Equal from "./components/various/equal";
 
-import Display from "./components/various/display.js";
-import Clear from "./components/various/clear.js";
-import Modulus from "./components/various/modulus.js";
-import PositiveOrNegative from "./components/various/positiveOrNegative.js";
-import Comma from "./components/various/comma.js";
-import Log from "./components/various/log.js";
+import Display from "./components/various/display";
+
+import Comma from "./components/various/comma";
+import Log from "./components/various/log";
 const log = console.log;
 
 const App = () => {
@@ -85,17 +87,19 @@ const App = () => {
         let newNumber = -number;
         setNum2("" + newNumber);
         setDisplay("" + newNumber);
+      } else {
+        setNum2(Math.abs("" + number));
+        setDisplay(Math.abs("" + number));
       }
-      setNum2(Math.abs("" + number));
-      setDisplay(Math.abs("" + number));
     } else {
       if (Number(number) === Math.abs("" + number)) {
         let newNumber = -number;
         setNum1("" + newNumber);
         setDisplay("" + newNumber);
+      } else {
+        setNum1(Math.abs("" + number));
+        setDisplay(Math.abs("" + number));
       }
-      setNum1(Math.abs("" + number));
-      setDisplay(Math.abs("" + number));
     }
   };
 
@@ -139,29 +143,18 @@ const App = () => {
   return (
     <>
       <Title />
-      <div className="top-container">
+      <div className="topContainer">
         <Log memory={memory} />
         <div className="container">
           <div className="calculator">
             <Display display={display} />
             <div className="underDisplay">
-              <div className="first line">
-                <Clear clear={clear} />
-                <PositiveOrNegative
-                  negativePositive={negativePositive}
-                  number={display}
-                />
-                <Modulus
-                  operator="%"
-                  cssClass="modulus"
-                  doubleFunc={doubleFunc}
-                />
-                <Operator
-                  operator="/"
-                  cssClass="division"
-                  doubleFunc={doubleFunc}
-                />
-              </div>
+              <Firstline
+                clear={clear}
+                negativePositive={negativePositive}
+                display={display}
+                doubleFunc={doubleFunc}
+              />
               <div className="second line">
                 <Number number="7" col_span="1" addNumber={addNumber} />
                 <Number number="8" col_span="1" addNumber={addNumber} />
@@ -172,7 +165,7 @@ const App = () => {
                   doubleFunc={doubleFunc}
                 />
               </div>
-              <div className="Third line">
+              <div className="third line">
                 <Number number="4" col_span="1" addNumber={addNumber} />
                 <Number number="5" col_span="1" addNumber={addNumber} />
                 <Number number="6" col_span="1" addNumber={addNumber} />
@@ -182,7 +175,7 @@ const App = () => {
                   doubleFunc={doubleFunc}
                 />
               </div>
-              <div className="Fourth line">
+              <div className="fourth line">
                 <Number number="1" col_span="1" addNumber={addNumber} />
                 <Number number="2" col_span="1" addNumber={addNumber} />
                 <Number number="3" col_span="1" addNumber={addNumber} />
@@ -192,7 +185,7 @@ const App = () => {
                   doubleFunc={doubleFunc}
                 />
               </div>
-              <div className="Fifth line">
+              <div className="fifth line">
                 <Number number="0" col_span="2" addNumber={addNumber} />
                 <Comma comma={comma} />
                 <Equal

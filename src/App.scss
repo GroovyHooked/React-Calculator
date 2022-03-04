@@ -10,7 +10,7 @@ body {
   background-color: #f4a261;
 }
 
-.top-container {
+.topContainer {
   min-height: 90vh;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@ body {
   }
 }
 
-.App-header {
+.appHeader {
   text-align: center;
 }
 .calculator {
@@ -107,7 +107,7 @@ body {
   }
 }
 
-.Fifth.line{
+.fifth.line{
   .box:nth-child(3){
     background-color: $rightSide;
   }
