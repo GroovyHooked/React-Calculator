@@ -25,14 +25,25 @@ const App = () => {
   const [isOp, setIsOp] = useState(false);
   const [whichOperator, setwhichOperator] = useState("");
   const [memory, setMemory] = useState([]);
+  const [bol, setBol] = useState(false);
 
   const clear = () => {
-    setDisplay("");
-    setNum1("");
-    setNum2("");
-    setResetOp(false);
-    setwhichOperator("");
-    setMemory([]);
+    if (!bol) {
+      setDisplay("");
+      setNum1("");
+      setNum2("");
+      setResetOp(false);
+      setwhichOperator("");
+      setBol(true);
+    } else {
+      setDisplay("");
+      setNum1("");
+      setNum2("");
+      setResetOp(false);
+      setwhichOperator("");
+      setMemory([]);
+      setBol(false);
+    }
   };
 
   useEffect(() => {
@@ -58,8 +69,14 @@ const App = () => {
   };
 
   const comma = () => {
-    setDisplay(display + ".");
-    whichOperator !== "" ? setNum2(num2 + ".") : setNum1(num1 + ".");
+    if (display === "") return;
+    log(display.search(/\./));
+    if (display.search(/\./) !== -1) {
+      return;
+    } else {
+      setDisplay(display + ".");
+      whichOperator !== "" ? setNum2(num2 + ".") : setNum1(num1 + ".");
+    }
   };
 
   const negativePositive = (number) => {
@@ -99,19 +116,20 @@ const App = () => {
   };
 
   const addNumber = (num) => {
-    if (num1 === "" && isOp === false) {
+    setBol(false);
+    if (num1 === "" && !isOp) {
       log("scope 1");
       setDisplay("" + display + num);
       setNum1("" + num1 + num);
-    } else if (num1 !== "" && isOp === false) {
+    } else if (num1 !== "" && !isOp) {
       log("scope 2");
       setDisplay("" + display + num);
       setNum1("" + num1 + num);
-    } else if (num2 === "" && isOp === true) {
+    } else if (num2 === "" && isOp) {
       log("scope 3");
       setDisplay("" + display + num);
       setNum2("" + num2 + num);
-    } else if (num2 !== "" && isOp === true) {
+    } else if (num2 !== "" && isOp) {
       log("scope 4");
       setDisplay("" + display + num);
       setNum2("" + num2 + num);
