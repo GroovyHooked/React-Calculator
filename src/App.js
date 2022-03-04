@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import "./App.scss";
 
-import Mycalculator from "./logic.js";
-import Title from "./title";
-import Number from "./components/numbers/Number.js";
-import Operator from "./components/operators/Operator";
+import Mycalculator from "./components/various/logic.js";
+import Title from "./components/various/title";
+import Number from "./components/Number.js";
+import Operator from "./components/Operator";
 
-import Equal from "./components/operators/equal.js";
+import Equal from "./components/various/equal.js";
 
-import Display from "./display.js";
+import Display from "./components/various/display.js";
 import Clear from "./components/various/clear.js";
 import Modulus from "./components/various/modulus.js";
 import PositiveOrNegative from "./components/various/positiveOrNegative.js";
