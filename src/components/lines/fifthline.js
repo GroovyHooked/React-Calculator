@@ -3,7 +3,7 @@ import Number from "../Number";
 import Comma from "../various/Comma";
 import Equal from "../various/Equal";
 
-export const Fifthline = ({
+const Fifthline = ({
   addNumber,
   comma,
   numberOnHold,
@@ -24,3 +24,5 @@ export const Fifthline = ({
     </div>
   );
 };
+
+export default Fifthline;

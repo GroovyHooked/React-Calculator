@@ -4,7 +4,7 @@ import PositiveOrNegative from "../various/PositiveOrNegative";
 import Modulus from "../various/Modulus";
 import Operator from "../Operator";
 
-export const Firstline = ({ clear, negativePositive, display, doubleFunc }) => {
+const Firstline = ({ clear, negativePositive, display, doubleFunc }) => {
   return (
     <div className="first line">
       <Clear clear={clear} />
@@ -17,3 +17,4 @@ export const Firstline = ({ clear, negativePositive, display, doubleFunc }) => {
     </div>
   );
 };
+export default Firstline;

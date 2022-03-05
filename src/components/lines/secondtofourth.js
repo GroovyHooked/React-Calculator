@@ -2,15 +2,15 @@ import React from "react";
 import Number from "../Number";
 import Operator from "../Operator";
 
-export const SecondToFourth = (
-  {numA,
+const SecondToFourth = ({
+  numA,
   numB,
   numC,
   addNumber,
   doubleFunc,
   operator,
-  cssClass}
-) => {
+  cssClass,
+}) => {
   return (
     <div className={"second line " + cssClass}>
       <Number number={numA} col_span="1" addNumber={addNumber} />
@@ -25,3 +25,4 @@ export const SecondToFourth = (
   );
 };
 
+export default SecondToFourth;

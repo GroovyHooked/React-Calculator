@@ -1,5 +1,3 @@
-import React from "react";
-
 const Operator = ({ operator, cssClass, doubleFunc }) => {
   return (
     <div

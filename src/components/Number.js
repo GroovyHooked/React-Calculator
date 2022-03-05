@@ -1,5 +1,3 @@
-import React from "react";
-
 const Number = ({ number, col_span, addNumber }) => {
   return (
     <div className="box" colSpan={col_span} onClick={() => addNumber(number)}>
