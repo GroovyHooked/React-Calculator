@@ -93,18 +93,33 @@ const App = () => {
   const equal = (numberOnHold, num2, whichOperator) => {
     let operation = new Mycalculator(numberOnHold, whichOperator, num2);
     let res = operation.whichCalc();
-    console.log(String(res).length);
-    debugger;
-    if (String(res).length > 9) {
-      setDisplay(
-        "" + Math.floor(String(res)[0]) + "e" + (String(res).length - 1)
-      );
-      setMemory((mem) => [
-        ...mem,
-        `${numberOnHold} ${whichOperator} ${num2} = ${Math.floor(
-          String(res)[0]
-        )}e${String(res).length - 1}`,
-      ]);
+    const stringRes = String(res);
+    if (stringRes.length > 9 && !stringRes.includes(".")) {
+      if (stringRes[1] > 8 && stringRes[1] < 3) {
+        setDisplay(`${Math.floor(stringRes[0])}e${stringRes.length - 1}`);
+        setMemory((mem) => [
+          ...mem,
+          `${numberOnHold} ${whichOperator} ${num2} = ${Math.floor(
+            stringRes[0]
+          )}e${stringRes.length - 1}`,
+        ]);
+      } else {
+        setDisplay(
+          `${Math.floor(stringRes[0])}.${Math.floor(stringRes[1])}${Math.floor(
+            stringRes[2]
+          )}${Math.floor(stringRes[3])}${Math.floor(stringRes[4])}e${
+            stringRes.length - 1
+          }`
+        );
+        setMemory((mem) => [
+          ...mem,
+          `${numberOnHold} ${whichOperator} ${num2} = ${Math.floor(
+            stringRes[0]
+          )}.${Math.floor(stringRes[1])}${Math.floor(stringRes[2])}${Math.floor(
+            stringRes[3]
+          )}${Math.floor(stringRes[4])}e${stringRes.length - 1}`,
+        ]);
+      }
     } else {
       setDisplay(res);
       setMemory((mem) => [
