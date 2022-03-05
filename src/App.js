@@ -4,18 +4,8 @@ import "./App.scss";
 import Mycalculator from "./components/various/logic";
 import Title from "./components/various/title";
 
-import { Firstline } from "./components/lines/firstline";
-//import { SecondToFourth } from "./components/lines/secondtofourth";
+import { Calculator } from "./Calculator";
 
-import Number from "./components/Number";
-import Operator from "./components/Operator";
-
-import Equal from "./components/various/equal";
-
-import Display from "./components/various/display";
-
-import Comma from "./components/various/comma";
-import Log from "./components/various/log";
 const log = console.log;
 
 const App = () => {
@@ -59,6 +49,7 @@ const App = () => {
   };
 
   const operator = (op) => {
+    if (num2 !== "") return;
     setwhichOperator(op);
     setDisplay(display + op);
   };
@@ -72,13 +63,9 @@ const App = () => {
 
   const comma = () => {
     if (display === "") return;
-    log(display.search(/\./));
-    if (display.search(/\./) !== -1) {
-      return;
-    } else {
-      setDisplay(display + ".");
-      whichOperator !== "" ? setNum2(num2 + ".") : setNum1(num1 + ".");
-    }
+    if (display.search(/\./) !== -1) return;
+    setDisplay(display + ".");
+    whichOperator !== "" ? setNum2(num2 + ".") : setNum1(num1 + ".");
   };
 
   const negativePositive = (number) => {
@@ -106,17 +93,32 @@ const App = () => {
   const equal = (numberOnHold, num2, whichOperator) => {
     let operation = new Mycalculator(numberOnHold, whichOperator, num2);
     let res = operation.whichCalc();
-    setDisplay(res);
+    console.log(String(res).length);
+    debugger;
+    if (String(res).length > 9) {
+      setDisplay(
+        "" + Math.floor(String(res)[0]) + "e" + (String(res).length - 1)
+      );
+      setMemory((mem) => [
+        ...mem,
+        `${numberOnHold} ${whichOperator} ${num2} = ${Math.floor(
+          String(res)[0]
+        )}e${String(res).length - 1}`,
+      ]);
+    } else {
+      setDisplay(res);
+      setMemory((mem) => [
+        ...mem,
+        `${numberOnHold} ${whichOperator} ${num2} = ${res}`,
+      ]);
+    }
+
     setResetOp(false);
     setNum1(res);
     setNum2("");
     setIsOp(false);
     setnumberOnHold("");
     setwhichOperator("");
-    setMemory((mem) => [
-      ...mem,
-      `${numberOnHold} ${whichOperator} ${num2} = ${res}`,
-    ]);
   };
 
   const addNumber = (num) => {
@@ -143,62 +145,19 @@ const App = () => {
   return (
     <>
       <Title />
-      <div className="topContainer">
-        <Log memory={memory} />
-        <div className="container">
-          <div className="calculator">
-            <Display display={display} />
-            <div className="underDisplay">
-              <Firstline
-                clear={clear}
-                negativePositive={negativePositive}
-                display={display}
-                doubleFunc={doubleFunc}
-              />
-              <div className="second line">
-                <Number number="7" col_span="1" addNumber={addNumber} />
-                <Number number="8" col_span="1" addNumber={addNumber} />
-                <Number number="9" col_span="1" addNumber={addNumber} />
-                <Operator
-                  operator="*"
-                  cssClass="multiplication"
-                  doubleFunc={doubleFunc}
-                />
-              </div>
-              <div className="third line">
-                <Number number="4" col_span="1" addNumber={addNumber} />
-                <Number number="5" col_span="1" addNumber={addNumber} />
-                <Number number="6" col_span="1" addNumber={addNumber} />
-                <Operator
-                  operator="-"
-                  cssClass="subtraction"
-                  doubleFunc={doubleFunc}
-                />
-              </div>
-              <div className="fourth line">
-                <Number number="1" col_span="1" addNumber={addNumber} />
-                <Number number="2" col_span="1" addNumber={addNumber} />
-                <Number number="3" col_span="1" addNumber={addNumber} />
-                <Operator
-                  operator="+"
-                  cssClass="addition"
-                  doubleFunc={doubleFunc}
-                />
-              </div>
-              <div className="fifth line">
-                <Number number="0" col_span="2" addNumber={addNumber} />
-                <Comma comma={comma} />
-                <Equal
-                  numberOnHold={numberOnHold}
-                  num2={num2}
-                  whichOperator={whichOperator}
-                  equal={equal}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Calculator
+        display={display}
+        clear={clear}
+        negativePositive={negativePositive}
+        doubleFunc={doubleFunc}
+        addNumber={addNumber}
+        comma={comma}
+        numberOnHold={numberOnHold}
+        num2={num2}
+        equal={equal}
+        whichOperator={whichOperator}
+        memory={memory}
+      />
     </>
   );
 };

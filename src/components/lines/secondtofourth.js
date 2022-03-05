@@ -3,13 +3,13 @@ import Number from "../Number";
 import Operator from "../Operator";
 
 export const SecondToFourth = (
-  numA,
+  {numA,
   numB,
   numC,
   addNumber,
   doubleFunc,
   operator,
-  cssClass
+  cssClass}
 ) => {
   return (
     <div className={"second line " + cssClass}>
@@ -25,15 +25,3 @@ export const SecondToFourth = (
   );
 };
 
-/**
- <SecondToFourth
-                numA="7"
-                numB="8"
-                numC="9"
-                addNumber={addNumber}
-                doubleFunc={doubleFunc}
-                operator="*"
-                cssClass="multiplication"
-              />
-  
- */
