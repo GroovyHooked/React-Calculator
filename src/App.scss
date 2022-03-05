@@ -9,36 +9,36 @@ $top: #a7b6d3;
 body {
   background-color: #f4a261;
 }
+.logs{
+  order: 2;
+  width: 247px;
+  min-height: 200px;
+  margin: 0 auto;
+  border: 1px solid $border;
+  color: $characters;
+  text-align: right;
 
-.topContainer {
+  .title{
+    text-align: center;
+    padding: 5px 0;
+    text-decoration: underline;
+  }
+  p{
+    margin:0;
+    padding-right: 10px;
+  }
+}
+.container {
   min-height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-
-  .logs{
-    order: 2;
-    width: 247px;
-    min-height: 200px;
-    margin: 0 auto;
-    border: 1px solid $border;
-    color: $characters;
-    text-align: right;
-  
-    .title{
-      text-align: center;
-      padding: 5px 0;
-      text-decoration: underline;
-    }
-    p{
-      margin:0;
-      padding-right: 10px;
-    }
-  }
 }
 
 .appHeader {
   text-align: center;
+  color: $characters;
+  font-size: 1.3em;
 }
 .calculator {
   border: 1px solid $border;
@@ -122,3 +122,34 @@ body {
 }
 
 
+@media (min-width: 768px) {
+  .container {
+    min-height: 90vh;
+    max-width: 70vw;
+    margin: 0 auto;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logs{
+    order: 2;
+    width: 247px;
+    min-height: 50vh;
+    margin: 0 auto;
+    border: 1px solid $border;
+    color: $characters;
+    text-align: right;
+  
+    .title{
+      text-align: center;
+      padding: 5px 0;
+      text-decoration: underline;
+    }
+    p{
+      margin:0;
+      padding-right: 10px;
+    }
+  }
+
+}
