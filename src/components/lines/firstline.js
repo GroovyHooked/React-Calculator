@@ -1,7 +1,7 @@
 import React from "react";
-import Clear from "../various/clear";
-import PositiveOrNegative from "../various/positiveOrNegative";
-import Modulus from "../various/modulus";
+import Clear from "../various/Clear";
+import PositiveOrNegative from "../various/PositiveOrNegative";
+import Modulus from "../various/Modulus";
 import Operator from "../Operator";
 
 export const Firstline = ({ clear, negativePositive, display, doubleFunc }) => {

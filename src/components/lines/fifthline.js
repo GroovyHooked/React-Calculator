@@ -1,7 +1,7 @@
 import React from "react";
 import Number from "../Number";
-import Comma from "../various/comma";
-import Equal from "../various/equal";
+import Comma from "../various/Comma";
+import Equal from "../various/Equal";
 
 export const Fifthline = ({
   addNumber,

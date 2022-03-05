@@ -1,9 +1,9 @@
 import React from 'react'
-import Display from './components/various/display';
-import { Firstline } from './components/lines/firstline';
-import { SecondToFourth } from './components/lines/secondtofourth';
-import { Fifthline } from './components/lines/fifthline';
-import { Log } from './components/various/log'
+import Display from './components/various/Display';
+import { Firstline } from './components/lines/Firstline';
+import { SecondToFourth } from './components/lines/Secondtofourth';
+import { Fifthline } from './components/lines/Fifthline';
+import { Log } from './components/various/Log'
 
 export const Calculator = ({display, clear, negativePositive, doubleFunc, addNumber, comma, numberOnHold, num2, equal, whichOperator, memory}) => {
   return (

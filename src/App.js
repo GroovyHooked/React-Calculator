@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import "./App.scss";
 
-import Mycalculator from "./components/various/logic";
-import Title from "./components/various/title";
+import Mycalculator from "./components/various/Logic";
+import Title from "./components/various/Title";
 
 import { Calculator } from "./Calculator";
 
