@@ -18,7 +18,8 @@ const App = () => {
   const [whichOperator, setwhichOperator] = useState("");
   const [memory, setMemory] = useState([]);
   const [clearBool, setClearBool] = useState(false);
-  const [addBOol, setAddBool] = useState(false);
+  const [isExponent, setIsExponent] = useState(false);
+  const [expoCoutner, setExpoCoutner] = useState(11);
 
   const clear = () => {
     if (!clearBool) {
@@ -28,6 +29,8 @@ const App = () => {
       setResetOp(false);
       setwhichOperator("");
       setClearBool(true);
+      setIsExponent(false);
+      setExpoCoutner(10);
     } else {
       setDisplay("");
       setNum1("");
@@ -36,6 +39,8 @@ const App = () => {
       setwhichOperator("");
       setMemory([]);
       setClearBool(false);
+      setIsExponent(false);
+      setExpoCoutner(10);
     }
   };
 
@@ -51,11 +56,14 @@ const App = () => {
 
   const operator = (op) => {
     if (num2 !== "") return;
+
     if (display.includes("*")) return;
     if (display.includes("+")) return;
     if (display.includes("/")) return;
     if (display.includes("-")) return;
     if (display.includes("%")) return;
+
+    setIsExponent(false);
     setwhichOperator(op);
     setDisplay(display + op);
   };
@@ -101,64 +109,41 @@ const App = () => {
     let res = operation.whichCalc();
     const stringRes = String(res);
     if (stringRes.length > 9 && !stringRes.includes(".")) {
-      if (stringRes[1] > 8 || stringRes[1] < 2) {
-        setDisplay(`${Math.floor(stringRes[0])}e${stringRes.length - 1}`);
-        setMemory((mem) => [
-          ...mem,
-          `${numberOnHold} ${whichOperator} ${num2} = ${Math.floor(
-            stringRes[0]
-          )}e${stringRes.length - 1}`,
-        ]);
-      } else {
-        setDisplay(
-          `${Math.floor(stringRes[0])}.${Math.floor(stringRes[1])}${Math.floor(
-            stringRes[2]
-          )}${Math.floor(stringRes[3])}${Math.floor(stringRes[4])}e${
-            stringRes.length - 1
-          }`
-        );
-        setMemory((mem) => [
-          ...mem,
-          `${numberOnHold} ${whichOperator} ${num2} = ${Math.floor(
-            stringRes[0]
-          )}.${Math.floor(stringRes[1])}${Math.floor(stringRes[2])}${Math.floor(
-            stringRes[3]
-          )}${Math.floor(stringRes[4])}e${stringRes.length - 1}`,
-        ]);
-      }
+      log("Scope A");
+      setDisplay(
+        `${Math.floor(stringRes[0])}.${Math.floor(stringRes[1])}${Math.floor(
+          stringRes[2]
+        )}${Math.floor(stringRes[3])}${Math.floor(stringRes[4])}e${
+          stringRes.length - 1
+        }`
+      );
+      setMemory((mem) => [
+        ...mem,
+        `${numberOnHold} ${whichOperator} ${num2} = ${Math.floor(
+          stringRes[0]
+        )}.${Math.floor(stringRes[1])}${Math.floor(stringRes[2])}${Math.floor(
+          stringRes[3]
+        )}${Math.floor(stringRes[4])}e${stringRes.length - 1}`,
+      ]);
     } else if (stringRes.length > 9 && stringRes.includes(".")) {
-      if (stringRes[1] > 8 && stringRes[1] < 2) {
-        setDisplay(
-          `${Math.floor(stringRes[0])}.${Math.floor(stringRes[1])}${Math.floor(
-            stringRes[2]
-          )}e${stringRes.length - 1}`
-        );
-        setMemory((mem) => [
-          ...mem,
-          `${numberOnHold} ${whichOperator} ${num2} = ${Math.floor(
-            stringRes[0]
-          )}.${Math.floor(stringRes[1])}${Math.floor(stringRes[2])}e${
-            stringRes.length - 1
-          }`,
-        ]);
-      } else {
-        setDisplay(
-          `${Math.floor(stringRes[0])}.${Math.floor(stringRes[1])}${Math.floor(
-            stringRes[2]
-          )}${Math.floor(stringRes[3])}${Math.floor(stringRes[4])}e${
-            stringRes.length - 1
-          }`
-        );
-        setMemory((mem) => [
-          ...mem,
-          `${numberOnHold} ${whichOperator} ${num2} = ${Math.floor(
-            stringRes[0]
-          )}.${Math.floor(stringRes[1])}${Math.floor(stringRes[2])}${Math.floor(
-            stringRes[3]
-          )}${Math.floor(stringRes[4])}e${stringRes.length - 1}`,
-        ]);
-      }
+      log("Scope B");
+      setDisplay(
+        `${Math.floor(stringRes[0])}.${Math.floor(stringRes[1])}${Math.floor(
+          stringRes[2]
+        )}${Math.floor(stringRes[3])}${Math.floor(stringRes[4])}e${
+          stringRes.length - 1
+        }`
+      );
+      setMemory((mem) => [
+        ...mem,
+        `${numberOnHold} ${whichOperator} ${num2} = ${Math.floor(
+          stringRes[0]
+        )}.${Math.floor(stringRes[1])}${Math.floor(stringRes[2])}${Math.floor(
+          stringRes[3]
+        )}${Math.floor(stringRes[4])}e${stringRes.length - 1}`,
+      ]);
     } else {
+      log("Scope C");
       setDisplay(res);
       setMemory((mem) => [
         ...mem,
@@ -178,20 +163,43 @@ const App = () => {
     if (false) {
       debugger;
     }
-    log(display[0], display[1], display[2], display[3]);
-    log("display.length " + display.length);
-
-    if (display.length > 9 || !addBOol) {
-      setAddBool(true);
-      let count = 0;
+    //log("display.length " + display.length);
+    let mybool = numberOnHold ? (num1.length <= 9) : (num2.length <= 9)
+    log("num1", num1.length);
+    log("num2", num2);
+    log(mybool)
+    if ( num1.length <= 9 && !isExponent) {
+      log("scope 1 (num.length <= 9 && !isExponent)");
       if (num1 === "" && !isOp) {
-        log("scope 1");
+        log("scope 2");
+        setDisplay("" + display + num);
+        setNum1("" + num1 + num);
+      } else if (num1 !== "" && !isOp) {
+        log("scope 3");
+        setDisplay("" + display + num);
+        setNum1("" + num1 + num);
+      } else if (num2 === "" && isOp) {
+        log("scope 4");
+        setDisplay("" + display + num);
+        setNum2("" + num2 + num);
+      } else if (num2 !== "" && isOp) {
+        log("scope 5");
+        setDisplay("" + display + num);
+        setNum2("" + num2 + num);
+      }
+
+      // end [ (display.length <= 9 && !isExponent) ]
+    } else if (!isExponent) {
+      setIsExponent(true);
+      log("scope 6 (!isExponent)");
+
+      if (num1 === "" && !isOp) {
+        log('scope 7 (num1 === "" && !isOp)');
         setDisplay("" + display + num);
         setNum1("" + num1 + num);
       } else if (num1 !== "" && !isOp) {
         log("display.length", display.length);
-        log("scope A2");
-        count = Number(display.length);
+        log('scope 8 (num1 !== "" && !isOp)');
         setDisplay(
           "" +
             display[0] +
@@ -204,66 +212,66 @@ const App = () => {
             display.length
         );
         setNum1("" + num1 + num);
-      } else if (num1 !== "" && !isOp) {
-        log("display.length", display.length);
-        log("scope ABis2");
-        setDisplay(display + count);
-        setNum1("" + num1 + num);
       } else if (num2 === "" && isOp) {
-        log("scope 3");
+        log("scope 10");
         setDisplay("" + display + num);
         setNum2("" + num2 + num);
       } else if (num2 !== "" && isOp) {
-        log("scope 4");
-        setDisplay("" + display + num);
+        log("scope 11");
+        setDisplay(
+          display +
+            num2[0] +
+            "." +
+            num2[1] +
+            num2[2] +
+            num2[3] +
+            num2[4] +
+            "e" +
+            num2.length
+        );
         setNum2("" + num2 + num);
       }
-    } else if (display.length > 9 || addBOol) {
-      setAddBool(true);
-      let count = 0;
+
+      // End [ if (!isExponent) ]
+    } else if (isExponent) {
+      log("scope 12 (display.length > 9 || addBOol)");
       if (num1 === "" && !isOp) {
-        log("scope 1");
+        log('scope 13 (num1 === "" && !isOp)');
         setDisplay("" + display + num);
         setNum1("" + num1 + num);
       } else if (num1 !== "" && !isOp) {
         log("display.length", display.length);
-        log("scope A2");
-        count = Number(display.length);
-        setDisplay("" + display + count++);
-        setNum1("" + num1 + num);
-      } else if (num1 !== "" && !isOp) {
-        log("display.length", display.length);
-        log("scope ABis2");
-        setDisplay(display + count);
+        log('scope 14 (num1 !== "" && !isOp)');
+        setExpoCoutner(expoCoutner + 1);
+        setDisplay(
+          display[0] +
+            display[1] +
+            display[2] +
+            display[3] +
+            display[4] +
+            "e" +
+            expoCoutner
+        );
         setNum1("" + num1 + num);
       } else if (num2 === "" && isOp) {
-        log("scope 3");
+        log("scope 16");
         setDisplay("" + display + num);
         setNum2("" + num2 + num);
       } else if (num2 !== "" && isOp) {
-        log("scope 4");
-        setDisplay("" + display + num);
+        log("scope 17");
+        setExpoCoutner(expoCoutner + 1);
+        setDisplay(
+          display[0] +
+            display[1] +
+            display[2] +
+            display[3] +
+            display[4] +
+            "e" +
+            expoCoutner
+        );
         setNum2("" + num2 + num);
       }
-    } else {
-      if (num1 === "" && !isOp) {
-        log("scope 1");
-        setDisplay("" + display + num);
-        setNum1("" + num1 + num);
-      } else if (num1 !== "" && !isOp) {
-        log("scope B2");
-        setDisplay("" + display + num);
-        setNum1("" + num1 + num);
-      } else if (num2 === "" && isOp) {
-        log("scope 3");
-        setDisplay("" + display + num);
-        setNum2("" + num2 + num);
-      } else if (num2 !== "" && isOp) {
-        log("scope 4");
-        setDisplay("" + display + num);
-        setNum2("" + num2 + num);
-      }
-    }
+    } // End [ if (isExponent) ]
   };
 
   return (
