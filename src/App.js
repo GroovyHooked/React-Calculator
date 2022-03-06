@@ -30,12 +30,13 @@ const App = () => {
       setwhichOperator("");
       setMemory([]);
       setClearBool(false);
+      setnumberOnHold("")
     }
   };
 
 
   const opOnOrOff = () => {
-    setnumberOnHold(number);
+    console.log("test")
   };
 
   const operator = (op) => {
@@ -47,9 +48,9 @@ const App = () => {
 
     setwhichOperator(op);
     setDisplay("" + display + op);
-
+    // eslint-disable-next-line no-unused-expressions
+    (numberOnHold === "") ? setnumberOnHold(number) : null
     setNumber("");
-    setnumberOnHold(number);
     if(number > 9){
        setExponentOnHold("" + number[0] +
          "." +
@@ -143,11 +144,11 @@ const App = () => {
         `${numberOnHold} ${whichOperator} ${number} = ${res}`,
       ]);
       setResult(res)
-      setnumberOnHold(result);
+      setnumberOnHold(res);
     }
 
     setNumber("");
-    setnumberOnHold(result);
+    setnumberOnHold(res);
     setwhichOperator("");
   };
 
