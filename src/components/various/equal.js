@@ -1,8 +1,8 @@
-const Equal = ({ numberOnHold, num2, whichOperator, equal }) => {
+const Equal = ({ numberOnHold, number, whichOperator, equal }) => {
   return (
     <div
       className="right equal box"
-      onClick={() => equal(numberOnHold, num2, whichOperator)}
+      onClick={() => equal(numberOnHold, number, whichOperator)}
     >
       =
     </div>

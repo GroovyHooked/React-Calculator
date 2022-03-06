@@ -7,7 +7,7 @@ const Fifthline = ({
   addNumber,
   comma,
   numberOnHold,
-  num2,
+  number,
   whichOperator,
   equal,
 }) => {
@@ -17,7 +17,7 @@ const Fifthline = ({
       <Comma comma={comma} />
       <Equal
         numberOnHold={numberOnHold}
-        num2={num2}
+        number={number}
         whichOperator={whichOperator}
         equal={equal}
       />

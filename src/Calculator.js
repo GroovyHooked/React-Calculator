@@ -13,7 +13,7 @@ export const Calculator = ({
   addNumber,
   comma,
   numberOnHold,
-  num2,
+  number,
   equal,
   whichOperator,
   memory,
@@ -62,7 +62,7 @@ export const Calculator = ({
             addNumber={addNumber}
             comma={comma}
             numberOnHold={numberOnHold}
-            num2={num2}
+            number={number}
             whichOperator={whichOperator}
             equal={equal}
           />
