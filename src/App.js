@@ -19,6 +19,13 @@ const App = () => {
   /*8*/ const [expo1Bool, setExpo1Bool] = useState(false);
   /*9*/ const [expo2Bool, setExpo2Bool] = useState(false);
 
+  const shrinkNumber = () => {
+    if (display.length > 18) {
+      const screenDisplay = document.querySelector(".display");
+      screenDisplay.style.fontSize = "19px";
+    }
+  };
+
   const clear = () => {
     if (!clearBool) {
       setDisplay("");
@@ -152,6 +159,7 @@ const App = () => {
   };
 
   const addNumber = (num) => {
+    shrinkNumber();
     if (number.length <= 9) {
       if (number === "") {
         setDisplay("" + display + num);
