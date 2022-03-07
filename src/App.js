@@ -18,11 +18,11 @@ const App = () => {
   /*7*/ const [exponentOnHold1, setExponentOnHold1] = useState("");
   /*8*/ const [expo1Bool, setExpo1Bool] = useState(false);
   /*9*/ const [expo2Bool, setExpo2Bool] = useState(false);
+  /*10*/ const [shrinkClass, setShrinkClass] = useState("");
 
   const shrinkNumber = () => {
     if (display.length > 18) {
-      const screenDisplay = document.querySelector(".display");
-      screenDisplay.style.fontSize = "19px";
+      setShrinkClass("shrink");
     }
   };
 
@@ -301,6 +301,7 @@ const App = () => {
       <Title />
       <Calculator
         display={display}
+        shrinkClass={shrinkClass}
         clear={clear}
         negativePositive={negativePositive}
         doubleFunc={doubleFunc}

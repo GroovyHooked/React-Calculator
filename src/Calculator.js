@@ -17,12 +17,13 @@ export const Calculator = ({
   equal,
   whichOperator,
   memory,
+  shrinkClass,
 }) => {
   return (
     <div className="container">
       <Log memory={memory} />
       <div className="calculator">
-        <Display display={display} />
+        <Display display={display} shrinkClass={shrinkClass} />
         <div className="underDisplay">
           <Firstline
             clear={clear}

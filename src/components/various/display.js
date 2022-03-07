@@ -1,7 +1,10 @@
-const Display = ({ display }) => {
+const Display = ({ display, shrinkClass }) => {
   return (
     <div className="display">
-      <div colSpan="4" className="result">
+      <div
+        colSpan="4"
+        className={"result " + shrinkClass !== "" ? shrinkClass : ""}
+      >
         {display}
       </div>
     </div>
