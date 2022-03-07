@@ -15,10 +15,9 @@ const App = () => {
   /*4*/ const [whichOperator, setwhichOperator] = useState("");
   /*5*/ const [memory, setMemory] = useState([]);
   /*6*/ const [clearBool, setClearBool] = useState(false);
-  /*7*/ const [result, setResult] = useState("");
-  /*8*/ const [exponentOnHold1, setExponentOnHold1] = useState("");
-  /*9*/ const [expo1Bool, setExpo1Bool] = useState(false);
-  /*10*/ const [expo2Bool, setExpo2Bool] = useState(false);
+  /*7*/ const [exponentOnHold1, setExponentOnHold1] = useState("");
+  /*8*/ const [expo1Bool, setExpo1Bool] = useState(false);
+  /*9*/ const [expo2Bool, setExpo2Bool] = useState(false);
 
   const clear = () => {
     if (!clearBool) {
@@ -43,19 +42,32 @@ const App = () => {
   };
 
   const operator = (op) => {
-    // if (display !== "") {
-    //   if (display.includes("*")) return;
-    //   if (display.includes("+")) return;
-    //   if (display.includes("/")) return;
-    //   if (display.includes("-")) return;
-    //   if (display.includes("%")) return;
-    // }
+    if (numberOnHold !== "" && whichOperator !== "" && numberOnHold !== "") {
+      let operation = new Mycalculator(numberOnHold, whichOperator, number);
+      let res = operation.whichCalc();
+      log("Scope C");
+      setDisplay(res);
+      setMemory((mem) => [
+        ...mem,
+        `${numberOnHold} ${whichOperator} ${number} = ${res}`,
+      ]);
+      setnumberOnHold(res);
+      setNumber("");
+      setwhichOperator(op);
+      setDisplay("" + res + op);
+    } else {
+      if (display.toString().includes("*")) return;
+      if (display.toString().includes("+")) return;
+      if (display.toString().includes("/")) return;
+      if (display.toString().includes("-")) return;
+      if (display.toString().includes("%")) return;
 
-    setwhichOperator(op);
-    setDisplay("" + display + op);
-    // eslint-disable-next-line no-unused-expressions
-    numberOnHold === "" ? setnumberOnHold(number) : null;
-    setNumber("");
+      setwhichOperator(op);
+      setDisplay("" + display + op);
+      // eslint-disable-next-line no-unused-expressions
+      numberOnHold === "" ? setnumberOnHold(number) : null;
+      setNumber("");
+    }
   };
 
   const doubleFunc = {
@@ -86,47 +98,42 @@ const App = () => {
   const equal = (numberOnHold, number, whichOperator) => {
     let operation = new Mycalculator(numberOnHold, whichOperator, number);
     let res = operation.whichCalc();
-    setResult(String(res).length);
-    log(result);
-    if (result.length > 9 && !result.includes(".")) {
+    let stringRes = res.toString();
+    log("result => " + typeof stringRes + " " + stringRes);
+    if (stringRes.length > 9 && !stringRes.includes(".")) {
       log("Scope A");
       setDisplay(
-        `${Math.floor(result[0])}.${Math.floor(result[1])}${Math.floor(
-          result[2]
-        )}${Math.floor(result[3])}${Math.floor(result[4])}e${result.length - 1}`
-      );
-      setResult(
-        `${Math.floor(result[0])}.${Math.floor(result[1])}${Math.floor(
-          result[2]
-        )}${Math.floor(result[3])}${Math.floor(result[4])}e${result.length - 1}`
+        `${Math.floor(stringRes[0])}.${Math.floor(stringRes[1])}${Math.floor(
+          stringRes[2]
+        )}${Math.floor(stringRes[3])}${Math.floor(stringRes[4])}e${
+          stringRes.length - 1
+        }`
       );
       setMemory((mem) => [
         ...mem,
         `${numberOnHold} ${whichOperator} ${number} = ${Math.floor(
-          result[0]
-        )}.${Math.floor(result[1])}${Math.floor(result[2])}${Math.floor(
-          result[3]
-        )}${Math.floor(result[4])}e${result.length - 1}`,
+          stringRes[0]
+        )}.${Math.floor(stringRes[1])}${Math.floor(stringRes[2])}${Math.floor(
+          stringRes[3]
+        )}${Math.floor(stringRes[4])}e${stringRes.length - 1}`,
       ]);
-    } else if (result.length > 9 && result.includes(".")) {
+      setnumberOnHold(res);
+    } else if (stringRes.length > 9 && stringRes.includes(".")) {
       log("Scope B");
       setDisplay(
-        `${Math.floor(result[0])}${result[1]}${Math.floor(
-          result[2]
-        )}${Math.floor(result[3])}${Math.floor(result[4])}e${result.length}`
-      );
-      setResult(
-        `${Math.floor(result[0])}.${Math.floor(result[1])}${Math.floor(
-          result[2]
-        )}${Math.floor(result[3])}${Math.floor(result[4])}e${result.length - 1}`
+        `${Math.floor(stringRes[0])}${stringRes[1]}${Math.floor(
+          stringRes[2]
+        )}${Math.floor(stringRes[3])}${Math.floor(stringRes[4])}e${
+          stringRes.length
+        }`
       );
       setMemory((mem) => [
         ...mem,
         `${numberOnHold} ${whichOperator} ${number} = ${Math.floor(
-          result[0]
-        )}.${Math.floor(result[1])}${Math.floor(result[2])}${Math.floor(
-          result[3]
-        )}${Math.floor(result[4])}e${result.length}`,
+          stringRes[0]
+        )}.${Math.floor(stringRes[1])}${Math.floor(stringRes[2])}${Math.floor(
+          stringRes[3]
+        )}${Math.floor(stringRes[4])}e${stringRes.length}`,
       ]);
       setnumberOnHold(res);
       setNumber("");
@@ -138,7 +145,6 @@ const App = () => {
         ...mem,
         `${numberOnHold} ${whichOperator} ${number} = ${res}`,
       ]);
-      setResult(res);
       setnumberOnHold(res);
       setNumber("");
       setwhichOperator("");
@@ -234,6 +240,7 @@ const App = () => {
           );
           setDisplay(exponentOnHold1);
         } else if (expo1Bool && !expo2Bool && whichOperator === "") {
+          log("scope 1BB");
           setExponentOnHold1(
             "" +
               number[0] +
