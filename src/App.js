@@ -9,20 +9,23 @@ import { Calculator } from "./Calculator";
 const log = console.log;
 
 const App = () => {
-  const [display, setDisplay] = useState("");
-  const [number, setNumber] = useState("");
-  const [numberOnHold, setnumberOnHold] = useState("");
-  const [whichOperator, setwhichOperator] = useState("");
-  const [memory, setMemory] = useState([]);
-  const [clearBool, setClearBool] = useState(false);
-  const [result, setResult] = useState("");
-  const [exponentOnHold, setExponentOnHold] = useState("");
+  /*1*/ const [display, setDisplay] = useState("");
+  /*2*/ const [number, setNumber] = useState("");
+  /*3*/ const [numberOnHold, setnumberOnHold] = useState("");
+  /*4*/ const [whichOperator, setwhichOperator] = useState("");
+  /*5*/ const [memory, setMemory] = useState([]);
+  /*6*/ const [clearBool, setClearBool] = useState(false);
+  /*7*/ const [result, setResult] = useState("");
+  /*8*/ const [exponentOnHold1, setExponentOnHold1] = useState("");
+  /*9*/ const [expo1Bool, setExpo1Bool] = useState(false);
+  /*10*/ const [expo2Bool, setExpo2Bool] = useState(false);
 
   const clear = () => {
     if (!clearBool) {
       setDisplay("");
       setNumber("");
       setwhichOperator("");
+      setExponentOnHold1("");
       setClearBool(true);
     } else {
       setDisplay("");
@@ -30,37 +33,29 @@ const App = () => {
       setwhichOperator("");
       setMemory([]);
       setClearBool(false);
-      setnumberOnHold("")
+      setExponentOnHold1("");
+      setnumberOnHold("");
     }
   };
 
-
   const opOnOrOff = () => {
-    console.log("test")
+    console.log("test");
   };
 
   const operator = (op) => {
-    // if (display.includes("*")) return;
-    // if (display.includes("+")) return;
-    // if (display.includes("/")) return;
-    // if (display.includes("-")) return;
-    // if (display.includes("%")) return;
+    // if (display !== "") {
+    //   if (display.includes("*")) return;
+    //   if (display.includes("+")) return;
+    //   if (display.includes("/")) return;
+    //   if (display.includes("-")) return;
+    //   if (display.includes("%")) return;
+    // }
 
     setwhichOperator(op);
     setDisplay("" + display + op);
     // eslint-disable-next-line no-unused-expressions
-    (numberOnHold === "") ? setnumberOnHold(number) : null
+    numberOnHold === "" ? setnumberOnHold(number) : null;
     setNumber("");
-    if(number > 9){
-       setExponentOnHold("" + number[0] +
-         "." +
-         number[1] +
-         number[2] +
-         number[3] +
-         number[4] +
-         "e" +
-         number.length);
-    }
   };
 
   const doubleFunc = {
@@ -71,8 +66,8 @@ const App = () => {
   };
 
   const comma = () => {
-    if (display === "") return;
-    if (display.search(/\./) !== -1) return;
+    if (number === "") return;
+    if (number.search(/\./) !== -1) return;
     setDisplay(display + ".");
     setNumber(number + ".");
   };
@@ -91,21 +86,20 @@ const App = () => {
   const equal = (numberOnHold, number, whichOperator) => {
     let operation = new Mycalculator(numberOnHold, whichOperator, number);
     let res = operation.whichCalc();
-    setResult(String(res));
+    setResult(String(res).length);
+    log(result);
     if (result.length > 9 && !result.includes(".")) {
       log("Scope A");
       setDisplay(
         `${Math.floor(result[0])}.${Math.floor(result[1])}${Math.floor(
           result[2]
-        )}${Math.floor(result[3])}${Math.floor(result[4])}e${
-          result.length - 1
-        }`
+        )}${Math.floor(result[3])}${Math.floor(result[4])}e${result.length - 1}`
       );
-      setResult( `${Math.floor(result[0])}.${Math.floor(result[1])}${Math.floor(
-        result[2]
-      )}${Math.floor(result[3])}${Math.floor(result[4])}e${
-        result.length - 1
-      }`)
+      setResult(
+        `${Math.floor(result[0])}.${Math.floor(result[1])}${Math.floor(
+          result[2]
+        )}${Math.floor(result[3])}${Math.floor(result[4])}e${result.length - 1}`
+      );
       setMemory((mem) => [
         ...mem,
         `${numberOnHold} ${whichOperator} ${number} = ${Math.floor(
@@ -117,25 +111,26 @@ const App = () => {
     } else if (result.length > 9 && result.includes(".")) {
       log("Scope B");
       setDisplay(
+        `${Math.floor(result[0])}${result[1]}${Math.floor(
+          result[2]
+        )}${Math.floor(result[3])}${Math.floor(result[4])}e${result.length}`
+      );
+      setResult(
         `${Math.floor(result[0])}.${Math.floor(result[1])}${Math.floor(
           result[2]
-        )}${Math.floor(result[3])}${Math.floor(result[4])}e${
-          result.length - 1
-        }`
+        )}${Math.floor(result[3])}${Math.floor(result[4])}e${result.length - 1}`
       );
-      setResult(`${Math.floor(result[0])}.${Math.floor(result[1])}${Math.floor(
-        result[2]
-      )}${Math.floor(result[3])}${Math.floor(result[4])}e${
-        result.length - 1
-      }`)
       setMemory((mem) => [
         ...mem,
         `${numberOnHold} ${whichOperator} ${number} = ${Math.floor(
           result[0]
         )}.${Math.floor(result[1])}${Math.floor(result[2])}${Math.floor(
           result[3]
-        )}${Math.floor(result[4])}e${result.length - 1}`,
+        )}${Math.floor(result[4])}e${result.length}`,
       ]);
+      setnumberOnHold(res);
+      setNumber("");
+      setwhichOperator("");
     } else {
       log("Scope C");
       setDisplay(res);
@@ -143,13 +138,11 @@ const App = () => {
         ...mem,
         `${numberOnHold} ${whichOperator} ${number} = ${res}`,
       ]);
-      setResult(res)
+      setResult(res);
       setnumberOnHold(res);
+      setNumber("");
+      setwhichOperator("");
     }
-
-    setNumber("");
-    setnumberOnHold(res);
-    setwhichOperator("");
   };
 
   const addNumber = (num) => {
@@ -161,25 +154,130 @@ const App = () => {
         setDisplay("" + display + num);
         setNumber("" + number + num);
       }
-      // end [ (display.length <= 9) ]
     } else {
-      if (number === "") {
-        setDisplay("" + display + num);
-        setNumber("" + number + num);
-      } else {      
-        setDisplay(
-          "" + exponentOnHold + whichOperator +
-          number[0] +
-            "." +
-            number[1] +
-            number[2] +
-            number[3] +
-            number[4] +
-            "e" +
-            number.length
-        );
-        setNumber("" + number + num);
+      log("scope exponent");
+      if (number.includes(".")) {
+        log("scope 1A");
+
+        if (!expo1Bool && !expo2Bool) {
+          setExpo1Bool(true);
+          setExponentOnHold1(
+            "" +
+              number[0] +
+              number[1] +
+              number[2] +
+              number[3] +
+              number[4] +
+              number[5] +
+              "e" +
+              number.length
+          );
+          setDisplay(exponentOnHold1);
+        } else if (expo1Bool && !expo2Bool && whichOperator === "") {
+          setExponentOnHold1(
+            "" +
+              number[0] +
+              number[1] +
+              number[2] +
+              number[3] +
+              number[4] +
+              number[5] +
+              "e" +
+              number.length
+          );
+          setDisplay(exponentOnHold1);
+        } else if (expo1Bool && !expo2Bool && whichOperator !== "") {
+          setExpo2Bool(true);
+          setDisplay(
+            "" +
+              exponentOnHold1 +
+              whichOperator +
+              number[0] +
+              number[1] +
+              number[2] +
+              number[3] +
+              number[4] +
+              number[5] +
+              "e" +
+              number.length
+          );
+        } else if (expo1Bool && expo2Bool && whichOperator !== "") {
+          setDisplay(
+            "" +
+              exponentOnHold1 +
+              whichOperator +
+              number[0] +
+              number[1] +
+              number[2] +
+              number[3] +
+              number[4] +
+              number[5] +
+              "e" +
+              number.length
+          );
+        }
+      } else {
+        log("scope 1B");
+        if (!expo1Bool && !expo2Bool) {
+          log("scope 1BA");
+          setExpo1Bool(true);
+          setExponentOnHold1(
+            "" +
+              number[0] +
+              "." +
+              number[1] +
+              number[2] +
+              number[3] +
+              number[4] +
+              "e" +
+              (number.length - 1)
+          );
+          setDisplay(exponentOnHold1);
+        } else if (expo1Bool && !expo2Bool && whichOperator === "") {
+          setExponentOnHold1(
+            "" +
+              number[0] +
+              "." +
+              number[1] +
+              number[2] +
+              number[3] +
+              number[4] +
+              "e" +
+              (number.length - 1)
+          );
+          setDisplay(exponentOnHold1);
+        } else if (expo1Bool && !expo2Bool && whichOperator !== "") {
+          log("scope 1BC");
+          setDisplay(
+            "" +
+              exponentOnHold1 +
+              whichOperator +
+              number[0] +
+              "." +
+              number[1] +
+              number[2] +
+              number[3] +
+              number[4] +
+              "e" +
+              (number.length - 1)
+          );
+        } else if (expo1Bool && expo2Bool && whichOperator !== "") {
+          setDisplay(
+            "" +
+              exponentOnHold1 +
+              whichOperator +
+              number[0] +
+              "." +
+              number[1] +
+              number[2] +
+              number[3] +
+              number[4] +
+              "e" +
+              (number.length - 1)
+          );
+        }
       }
+      setNumber("" + number + num);
     }
   };
 
